@@ -314,4 +314,25 @@ multer
         res.send('ok');
     });
 
+.env 파일
+    ※※※※※절대 공유하지 않기.
+    프로젝트에서 중요한 키, 비밀번호, 포트번호 등등을 한꺼번에 관리하는 파일
+    소스는 유출되어도 이건 유출되면 안된다.
+
+    .env 파일은 파일명 자체를 그냥 .env 로 하면 됨
+    내부에는 key이름=값 형식으로 써주면 된다.
+    ex)
+    COOKIE_SECRET=COOKIESIGNEDWORD
+    DB_PASSWORD=nodejsbook
+    
+    js파일에서 불러오는 방법
+    const dotenv = require('dotenv'); //선언
+
+    dotenv.config();
+    선언문들을 모두 선언한 뒤 가장 먼저 써줘야함
+
+    필요한 곳에 써주기
+    ex)
+    app.use(cookieParser(process.env.COOKIE_SECRET)); // .env 파일에 있는 키값이 COOKIE_SECRET인 것의 실제값을 넣음.
+
     
