@@ -136,12 +136,27 @@ const scan = (dirName, opt) => {
 
 lg('실행ㅇㅇㅇㅇㅇ');
 
-lg(scan("C:/Users/mincj/OneDrive/바탕 화면/nodejs_study2/nodejs/nodejs/ExpressFramework/EX1", {
+// 경로의 파일 확장자별 추출
+lg(scan("C:/Users/PC/Desktop/newfolder/nodejs/nodejs/ExpressFramework/npm_formidable", {
     limitCnt: 0, // 검색파일 제한 수
     sizeFlag: false, // 검색되어 도출된 파일들의 전체 용량 추출 여부 (true 로 하면 느려진다.)
     //regExp: [/\.stories\./], // 검색경로를 배열에 넣는다. 첫번째 인자값으로 넣은 주소 + regExp 경로만 탐색하게 만든다.
                             // regExp 예시)    [/controller/, /Music/, /img/]
-    exts: ['json'], // 검색확장자 배열
+    exts: ['json', 'js', 'html'], // 검색확장자 배열
+                            // exts 예시) ['png','jpg','gif']
+    fnc: (fileData) =>{
+        // 검색ㄷ된 파일 하나하나 마다의 콜백함수이다.
+        lg("z",fileData.fileName);
+    }
+}));
+
+// 경로안의 모든 파일 검색하는 것,
+lg(scan("C:/Users/PC/Desktop/newfolder/nodejs/nodejs/ExpressFramework/npm_formidable", {
+    limitCnt: 0, // 검색파일 제한 수
+    sizeFlag: false, // 검색되어 도출된 파일들의 전체 용량 추출 여부 (true 로 하면 느려진다.)
+    regExp: [/npm_formidable/], // 검색경로를 배열에 넣는다. 첫번째 인자값으로 넣은 주소 + regExp 경로만 탐색하게 만든다.
+                            // regExp 예시)    [/controller/, /Music/, /img/]
+    //exts: ['json', 'js', 'html'], // 검색확장자 배열
                             // exts 예시) ['png','jpg','gif']
     fnc: (fileData) =>{
         // 검색ㄷ된 파일 하나하나 마다의 콜백함수이다.
