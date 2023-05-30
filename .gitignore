@@ -2,5 +2,5 @@
 # node_modules 폴더와 같은 위치에 만들어주면 된다. 그럼 node_modules 폴더 전체 무시
 #/node_modules
 
-# node_modules폴더들을 모든 경로에서 제외한다고 하는거.
+# nodejs 경로 하위의 모든 node_modules폴더들을 모든 경로에서 제외한다고 하는거.
 /nodejs/**/node_modules/
