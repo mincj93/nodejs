@@ -1,0 +1,17 @@
+{
+  "name": "newfolder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "formidable": "^2.1.1",
+    "nodemon": "^2.0.22"
+  }
+}

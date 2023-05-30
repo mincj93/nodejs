@@ -4,3 +4,4 @@
 
 # node_modules폴더들을 모든 경로에서 제외한다고 하는거.
 /nodejs/**/node_modules/
+/node_board/**/node_modules/
