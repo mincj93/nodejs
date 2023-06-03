@@ -213,6 +213,8 @@ static 미들웨어
     Express 에서 제공하는 미들웨어. 정적파일 보내줄때 씀
     중간 경로를 추가해주는 역할을 함. 실제경로를 숨길 수 있음.(보안에 도움)
     app.use('요청 경로', express.static('실제경로'));
+    ※ res.sendFile 이 public 을 안 타는건지, static 미들웨어가 경로를 못 찾는건지 알 수 없지만
+    HTML 파일의 경로는 그냥 public 안에 있어도 절대경로로 보내주자.
 
     예시)
     app.use('/', express.static(__dirname, 'public')); //선언

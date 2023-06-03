@@ -14,9 +14,6 @@ app.get('/', (req,res) =>{
     res.sendFile(__dirname + "/public/main.html");
 });
 
-// app.get('/board/main', function(req,res) {
-//     res.sendFile(__dirname + "/public/board/boardMain.html")
-// });
 router.get('/board', (req, res) =>{
     res.sendFile('/', boardRouter);
 });

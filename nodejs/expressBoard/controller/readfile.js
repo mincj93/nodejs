@@ -1,6 +1,4 @@
 // 파일시스템 접근 모듈
-const fs1 = require('fs');  
-// fs1 은 콜백형식으로 써야함. 따라서 일명 콜백헬 이라는 현상이 발생할 수 있음.
 const fs2 = require('fs').promises;  
 // 이건 fs1과 같지만 promise 형식을 지원하기에 콜백헬 현상 막을 수 있음. 즉 fs2 방식을 많이 쓰자.
 
@@ -18,9 +16,13 @@ fs1.readFile('../readme.txt', (err,data) =>{
 });
 */
 
+const ctr = {};
+
 // promise 형식으로 쓸 때
 // promise 형식을 지원하기 때문에 async await 형식도 쓸 수 있다. ★
-fs2.readFile('../readme.txt')
+ctr.readFile = () =>{
+    console.log('파일읽기');
+    fs2.readFile('./readme.txt')
     .then((data) =>{
         // 성공 했을 때
         console.log(data);
@@ -31,3 +33,6 @@ fs2.readFile('../readme.txt')
         console.log(err);
         throw err;
     });
+}
+
+module.exports = ctr;
