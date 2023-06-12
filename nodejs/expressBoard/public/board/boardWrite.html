@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>boardWrite</h1>
+    <a href="/board/readFile">파일읽기</a>
+    <a href="/board/">boardMain</a>
+    <a href="/board/list">boardList</a>
+    <a href="/board/write">boardWrite</a>
+    <a href="/">Main</a>
+
+    <form id="boardForm" action="" method="post">
+        <input type="text" maxlength="10" id="brd_title"><br>
+        <input type="text" maxlength="10" id="brd_title"><br>
+        <input type="text" maxlength="10" id="brd_title"><br>
+        <input type="submit" value="입력" onclick="submitFlag()">
+    </form>
+</body>
+<script>
+    function submitFlag() {
+        if (confirm("입력하시겠습니까?")) {
+            alert("확인");
+        } else {
+            alert("취소");
+        }
+    };
+</script>
+</html>

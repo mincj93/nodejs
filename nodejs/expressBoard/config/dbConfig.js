@@ -2,38 +2,13 @@ var oracledb = require('oracledb');
 
 const lg = console.log;
 
-const util = {};
+const odb = {};
 
-util.config = {
+odb.config = {
     user: "nodeboard",
     password: "nodeboard",
     connectString: "localhost/orcl"
-}
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-lg('util');
-module.exports = util;
+lg('dbConfig');
+module.exports = odb;
