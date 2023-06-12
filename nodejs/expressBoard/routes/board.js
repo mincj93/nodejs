@@ -5,13 +5,13 @@ const router = express.Router();
 const app = express();
 const lg = console.log;
 const readFileCtr = require('../controller/readfile.js');
+const util = require('../config/dbConfig.js');
 const bPath = path.join(__dirname , "../public/board");
 // app.get('/board/main', function(req,res) {
 //     res.sendFile(__dirname + "/public/board/boardMain.html")
 // });
 
 router.get('/', (req, res) => {
-    lg('boardMainzz');
     res.sendFile(bPath + "/boardMain.html");
 });
 
