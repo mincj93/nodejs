@@ -11,19 +11,20 @@
     <a href="/board/readFile">파일읽기</a>
     <a href="/board/">boardMain</a>
     <a href="/board/list">boardList</a>
-    <a href="/board/write">boardWrite</a>
+    <a href="/board/write">boardWrite</a> 
     <a href="/">Main</a>
 
-    <form id="boardForm" action="" method="post">
-        <input type="text" maxlength="10" id="brd_title"><br>
-        <input type="text" maxlength="10" id="brd_title"><br>
-        <input type="text" maxlength="10" id="brd_title"><br>
-        <input type="submit" value="입력" onclick="submitFlag()">
+    <form id="boardForm" name="boardForm" action="" method="post" >
+        제목 : <input type="text" maxlength="10" id="brd_title"><br>
+        내용 : <input type="text" maxlength="10" id="brd_title"><br>
+        글쓴이 : <input type="text" maxlength="10" id="brd_title"><br>
+        <input type="submit" value="입력" onclick="submitFlag();">
     </form>
 </body>
 <script>
     function submitFlag() {
-        if (confirm("입력하시겠습니까?")) {
+        let flag = confirm("입력하시겠습니까?");
+        if (flag) {
             alert("확인");
         } else {
             alert("취소");
