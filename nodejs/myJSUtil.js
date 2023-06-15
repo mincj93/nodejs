@@ -67,3 +67,60 @@ util.dateTime = (date, form) =>{
     else if( div ) return (year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second);
     else return year + month + day + hour + minute + second;
 }
+
+
+// 확장자 추출
+util.getExt = (fileName) => {
+    return  String(fileName)
+            .substring(fileName.lastIndexOf(".") + 1, fileName.length)
+            .toLocaleLowerCase();
+}
+
+// Json 파일 reader
+util.readJsonFile1 = (jsonFile) => {
+    let json = "";
+    json = fs.readFileSync(jsonFile).toString("utf8");
+    if (json) {
+        try {
+            json = JSON.parse(json);
+        } catch (error) {}
+        if( typeof json === "object" ) return json;
+    }
+};
+util.readJsonFile2 = (jsonFile, fnc) => {
+    if (fs.existsSync(jsonFile)) {
+        fs.readFile(jsonFile, "utf8", (er,json) => {
+            if(!er && json){
+                try {
+                    json = JSON.parse(json);
+                } catch (error) {}
+                if (typeof json === "object" && typeof fnc === "function")
+                    fnc(json, "config saved success.");
+                else if (typeof fnc === "function")
+                    fnc(false, "config JSON parsing error.");
+              } else if (typeof fnc === "function")
+                    fnc(false, "config JSON parsing error.");
+        });
+    } else if (typeof fnc === "function") fnc(false, "config file not found");
+};
+
+// 글자수 byte 사이즈 계산
+util.byteSize = (str) => {
+    let byte = 0;
+    for(let i =0; i < str.length; i++) {
+        str.charCodeAt(i) > 127 ? (byte += 3) : byte++;
+    }
+    lg(`바이트값 = ${byte}`);
+    return byte;
+}
+
+// 무작위 랜덤 스트링 만들기
+util.randomString = (num, ch) => {  // num = 문자열길이 지정, ch = 조합할 알파벳 문자열.
+    num = num || 5;
+    ch = ch || "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    let rs = ""; // 결과문자열
+    for(let i = 0; i < Number(n); i++) {
+        rs += ch[Math.floor(Math.random() * ch.length)];
+    }
+    return rs;
+};
