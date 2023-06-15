@@ -13,19 +13,20 @@
     <a href="/board/list">boardList</a>
     <a href="/board/write">boardWrite</a> 
     <a href="/">Main</a>
-
-    <form id="boardForm" name="boardForm" action="" method="post" >
-        제목 : <input type="text" maxlength="10" id="brd_title"><br>
-        내용 : <input type="text" maxlength="10" id="brd_title"><br>
-        글쓴이 : <input type="text" maxlength="10" id="brd_title"><br>
-        <input type="submit" value="입력" onclick="submitFlag();">
+    
+    <form id="boardForm" name="boardForm" action="/board/write" method="post">
+        제목 : <input type="text"  maxlength="10" name="brd_title"><br>
+        내용 : <input type="text" maxlength="10" name="brd_content"><br>
+        글쓴이 : <input type="text" maxlength="10" name="brd_writer"><br>
     </form>
+    <input type="submit" value="입력" onclick="submitFlag()">
 </body>
 <script>
     function submitFlag() {
         let flag = confirm("입력하시겠습니까?");
         if (flag) {
             alert("확인");
+            document.boardForm.submit();
         } else {
             alert("취소");
         }

@@ -1,12 +1,12 @@
 const path = require('path');
-const fmd = require('formidable');
+
 
 const express = require('express');
 const router = express.Router();
 
 const readFileCtr = require('../controller/readfile.js');
 const util = require('../config/dbConfig.js');
-
+const boardCtr = require('../controller/board/boardWrite.js');
 
 const lg = console.log;
 
@@ -41,7 +41,7 @@ router.get('/write', (req, res) => {
 
 router.post('/write', (req, res) => {
     lg('post', '/board/write');
-    res.sendFile(bPath + "/boardWrite.html");
+    
     //res.send();
 });
 
