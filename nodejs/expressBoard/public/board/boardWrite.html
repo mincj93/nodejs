@@ -14,10 +14,11 @@
     <a href="/board/write">boardWrite</a> 
     <a href="/">Main</a>
     
-    <form id="boardForm" name="boardForm" action="/board/write" method="post">
+    <form id="boardForm" name="boardForm" action="/board/write" method="post" enctype="multipart/form-data">
         제목 : <input type="text"  maxlength="10" name="brd_title"><br>
         내용 : <input type="text" maxlength="10" name="brd_content"><br>
         글쓴이 : <input type="text" maxlength="10" name="brd_writer"><br>
+        파일1 : <input type="file" name="brd_file1"><br>
     </form>
     <input type="submit" value="입력" onclick="submitFlag()">
 </body>

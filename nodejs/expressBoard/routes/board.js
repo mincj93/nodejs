@@ -41,8 +41,8 @@ router.get('/write', (req, res) => {
 
 router.post('/write', (req, res) => {
     lg('post', '/board/write');
-    
-    //res.send();
+    boardCtr.writeBoard(req);
+    res.sendFile(bPath + "/boardWrite.html");
 });
 
 module.exports = router;
