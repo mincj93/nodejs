@@ -8,12 +8,12 @@ create table nodeboard (
 
 create SEQUENCE nodeboard_seq start with 1 increment by 1;
 
-insert into nodeboard values (nodeboard_seq.NEXTVAL , 'nodeboard title1', '내용1' ,'글쓰니1', to_char(sysdate, 'YYYYMMDDHH24MISS'));
+insert into nodeboard values (nodeboard_seq.NEXTVAL , 'nodeboard title1', 'nodeboard content1', 'nodeboard writer1', to_char(sysdate, 'YYYYMMDDHH24MISS'));
 
 select * from nodeboard;
 
-drop table nodeboard;
+--drop table nodeboard;
 
-commit;
+--commit;
 
-rollback;
+--rollback;
