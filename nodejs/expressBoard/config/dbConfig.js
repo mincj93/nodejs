@@ -2,12 +2,10 @@ var oracledb = require('oracledb');
 
 const lg = console.log;
 
-const odb = {};
-
-odb.config = {
+const odb = {
     user: "nodeboard",
     password: "nodeboard",
-    connectString: "localhost/orcl"
+    connectString: "localhost/xe"
 };
 
 lg('dbConfig');
