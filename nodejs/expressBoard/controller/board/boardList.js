@@ -1,23 +1,15 @@
 const oracledb = require('oracledb');
+
 const odbCfg = require('../../odb/odbConfig.js');
 const query = require('../../query/boardQuery.js');
 
 const lg = console.log;
 
-// connection 해제
-function doRelease(connection) {
-	connection.release((err) => {
-		if(err) {
-			console.error(err.message);
-		}
-		lg(`connection 해제`);
-	});
-}
 
 
 const boardList = {};
 
-boardList.selectListQuery = () => {
+boardList.readListQuery = () => {
 
     oracledb.initOracleClient({
         // 오라클 DB 에선 라이브러리 세팅이 필요하다고 함.
@@ -51,6 +43,17 @@ boardList.selectListQuery = () => {
             });
         }
     );// oracledb.getConnection
-}
+};
+
+
+// connection 해제
+function doRelease(connection) {
+	connection.release((err) => {
+		if(err) {
+			console.error(err.message);
+		}
+		lg(`connection 해제`);
+	});
+};
 
 module.exports = boardList;

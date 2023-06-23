@@ -29,9 +29,8 @@ router.get('/readFile', (req, res) => {
 
 router.get('/list', (req, res) => {
     lg('get', '/board/list');
-    const getList = require(brdCtrPath + '/boardList.js');
-    getList.selectListQuery();
-    //odbConfig.selectQuery("select * from nodeboard");
+    const boardList = require(brdCtrPath + '/boardList.js');
+    boardList.readListQuery();
     res.sendFile(bPath + "/boardList.html");
     //res.send();
 });
@@ -43,8 +42,9 @@ router.get('/write', (req, res) => {
 });
 
 router.post('/write', (req, res) => {
+    const boardCreate = require(brdCtrPath + '/boardCreate.js');
     lg('post', '/board/write');
-    boardCtr.writeBoard(req);
+    boardCreate.createQuery(req);
     res.sendFile(bPath + "/boardWrite.html");
 });
 
