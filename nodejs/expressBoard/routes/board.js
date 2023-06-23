@@ -1,5 +1,4 @@
 const path = require('path');
-const odbCtr = require("../config/dbConfig");
 
 const express = require('express');
 const router = express.Router();
@@ -7,9 +6,12 @@ const router = express.Router();
 const readFileCtr = require('../controller/readfile.js');
 
 const bPath = path.join(__dirname , "../public/board");
+const brdCtrPath = path.join(__dirname,'../controller/board');
 // app.get('/board/main', function(req,res) {
 //     res.sendFile(__dirname + "/public/board/boardMain.html")
 // });
+
+// board controller 폴더 경로 C:\Users\mincj\OneDrive\바탕 화면\myFolder\nodejs\nodejs\expressBoard\controller\board
 
 
 const lg = console.log;
@@ -27,7 +29,9 @@ router.get('/readFile', (req, res) => {
 
 router.get('/list', (req, res) => {
     lg('get', '/board/list');
-    odbCtr.runQuery("select * from nodeboard");
+    const getList = require(brdCtrPath + '/boardList.js');
+    getList.selectListQuery();
+    //odbConfig.selectQuery("select * from nodeboard");
     res.sendFile(bPath + "/boardList.html");
     //res.send();
 });
