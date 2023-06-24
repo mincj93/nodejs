@@ -30,7 +30,7 @@ router.get('/readFile', (req, res) => {
 router.get('/list', (req, res) => {
     lg('get', '/board/list');
     const boardList = require(brdCtrPath + '/boardList.js');
-    boardList.readListQuery();
+    boardList.readList();
     res.sendFile(bPath + "/boardList.html");
     //res.send();
 });

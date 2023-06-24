@@ -1,7 +1,7 @@
 const oracledb = require('oracledb');
 const fmd = require('formidable');
 
-const odbCfg = require('../../odb/odbConfig.js');
+const odbCfg = require('../../odb/odb.js');
 const query = require('../../query/boardQuery.js');
 
 
