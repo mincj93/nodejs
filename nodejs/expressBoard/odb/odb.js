@@ -1,9 +1,13 @@
+// oracledb 설정 관련 참고 https://m.blog.naver.com/scw0531/221169287236
 const oracledb = require('oracledb');
 const path = require('path');
 
 const lg = console.log;
 
-const odb = {}
+const odb = {};
+
+// 오토커밋 설정
+oracledb.autoCommit = true;
 
 // 오라클 db 정보
 odb.odbCfg = {
@@ -44,8 +48,10 @@ odb.doRelease = (connection) => {
 
 
 
-// 실행기 본체.
-odb.getConn = (query, params) => {
+// readList 실행기 본체. 
+// return 값 = 쿼리결과값을 json 형태로 가져온 배열
+odb.RConn = (query, params) => {
+    // param 은 req 이다.
 
     odb.initClt(); // 라이브러리 시동
 
@@ -56,7 +62,7 @@ odb.getConn = (query, params) => {
                 console.error('getConnErr',err.message);
                 return;
             }
-
+            lg('RConn 실행');
             // connection이 성공할시에 query문을 수행하여 result에 JSON 객체를 받아옴
             connection.execute(query, {}, {outFormat:oracledb.OBJECT}, (err, result) => {
                 if(err) {
@@ -64,10 +70,52 @@ odb.getConn = (query, params) => {
                     odb.doRelease(connection);
                     return;
                 }
-                lg('조회 성공');
+            
+                lg('List 조회 완료 \n결과 ', result.rows[0].BRD_IDX);
 
+                odb.doRelease(connection);
+                const lists = result.rows;
+                return lists;
+            });
+        }
+    );// oracledb.getConnection
+}; // odb.RConn
+
+// create update delete 실행기 본체.
+// 결과값 = 쿼리결과로 영향받은 행의 총 개수(정수값)
+// 3개 DML (data manipulation language)은 쿼리만 다를뿐 동일하다고 함.
+odb.CUDConn = (query, params) => {
+    // param 은 formData(화면에서 받은 데이터들을 json형식으로 가져온 것들) 이다.
+    lg('CUDConn params == ',params);
+    odb.initClt(); // 라이브러리 시동
+
+    oracledb.getConnection(
+        odb.odbCfg,
+        function(err, connection) {
+            if(err) {
+                console.error('getConnErr',err.message);
+                return;
+            }
+            
+            lg('CUDConn 실행');
+
+            // 사용자가 보내준 값을 쿼리에 설정하기 위해 배열에 담음
+            // (nodeboard_seq.NEXTVAL , 'nodeboard title1', 'nodeboard content1', 'nodeboard writer1', to_char(sysdate, 'YYYYMMDDHH24MISS'));
+            const queryValues = [
+                params.brd_title,
+                params.brd_content,
+                params.brd_writer
+            ];
+
+            connection.execute(query, queryValues, {outFormat:oracledb.OBJECT}, (err, result) => {
+                if(err) {
+                    console.error(err.message);
+                    odb.doRelease(connection);
+                    return;
+                }
+                
                 // /api/customers 입력시 App.js에 데이터 전송
-                lg(result.rows[0].BRD_IDX);
+                lg('CUDConn 성공. \n결과 ',result.rowsAffected);
                 odb.doRelease(connection);
                 const lists = result.rows;
                 return lists;

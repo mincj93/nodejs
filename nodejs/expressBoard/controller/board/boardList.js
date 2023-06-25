@@ -9,9 +9,9 @@ const lg = console.log;
 
 const boardList = {};
 
-boardList.readList = () => {
+boardList.readList = (req) => {
     lg(query.selectList);
-    odb.getConn(query.selectList);
+    odb.RConn(query.selectList, req);
 };
 
 

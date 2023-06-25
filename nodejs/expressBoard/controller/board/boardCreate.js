@@ -1,5 +1,5 @@
 const oracledb = require('oracledb');
-const fmd = require('formidable');
+const formidable = require('formidable');
 
 const odbCfg = require('../../odb/odb.js');
 const query = require('../../query/boardQuery.js');
@@ -7,61 +7,45 @@ const query = require('../../query/boardQuery.js');
 
 const lg = console.log;
 
-
-
 const boardCreate = {};
 
-boardCreate.createQuery = (req) => {
-    lg(req.body);
+// boardCreate.createQuery = (req) => {
+//     const form = new formidable.IncomingForm();
+//     const formData = form.parse(req, (err, fields, file) =>{
 
-    /*
-    // insert 쿼리에 넣어줄 value들을 <변수에 담아 배열로 넘겨야함>.
-    params = [];    
-    oracledb.initOracleClient({
-        // 오라클 DB 에선 라이브러리 세팅이 필요하다고 함.
-        libDir: 'C:/instantclient-basic-windows.x64-21.10.0.0.0dbru/instantclient_21_10'
-    });
+//         if(err){
+//             lg('form parsing 중 에러 발생 ',err);
+//             return;
+//         }
+//         const originalFilename = file.brd_file1.originalFilename;
+//         const oldPath = file.brd_file1.filepath;
+//         const fieldData = fields;
+//         lg('fieldData',fieldData);
+
+//     });
     
-    lg(query.selectList);
+//     //odbCfg.CUDConn(query.insertOne , formData);
+// };
 
-    // oracle DB와 연결
-    oracledb.getConnection(
-        odbCfg,
-        function(err, connection) {
-            if(err) {
-                console.error(err.message);
-                return;
-            }
-            // 너
-            
-    // insert into nodeboard values (nodeboard_seq.NEXTVAL , 'nodeboard title1', 'nodeboard content1', 'nodeboard writer1', to_char(sysdate, 'YYYYMMDDHH24MISS'));
-            connection.execute(query.boardCreate, params, (err, result) => {
-                if(err) {
-                    console.error(err.message);
-                    doRelease(connection);
-                    return;
-                }
-                console.log('success');
+boardCreate.createQuery = (req) => {
+    const form = new formidable.IncomingForm();
 
-                res.send(result.rows);
-                doRelease(connection, result.rows);
-            }); // connection.execute
+    form.parse(req, (err, fields, file) =>{
+        
+        let params = {}; // DB에 입력할 전체 값들
+
+        if(err){
+            lg('form parsing 중 에러 발생 ',err);
+            return;
         }
-    ); // oracledb.getConnection
-*/
-};
+        lg('fields',fields);
+        params.brd_title = fields.brd_title;
+        params.brd_content = fields.brd_content;
+        params.brd_writer = fields.brd_writer;
 
-
-
-// connection 해제
-function doRelease(connection, rowList) {
-    connection.release((err) => {
-        if(err) {
-            console.error(err.message);
-        }
+        odbCfg.CUDConn(query.insertOne , params);
     });
 };
-
 
 
 module.exports = boardCreate;
