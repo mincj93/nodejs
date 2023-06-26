@@ -14,7 +14,7 @@ odb.odbCfg = {
     user: "nodeboard",
     password: "nodeboard",
     // connectString: "localhost/xe" 집은 orcl 노트북은 xe 로 되어있음..
-    connectString: "localhost/orcl"
+    connectString: "localhost/xe"
 };
 
 
@@ -22,10 +22,12 @@ odb.odbCfg = {
 
 // 라이브러리 시동
 odb.initClt = () => { 
+    lg('path출력',path.join(__dirname,'./odbLib'))
     oracledb.initOracleClient({
         // 오라클 DB 에선 라이브러리 세팅이 필요하다고 함.
         // 라이브러리를 다운로드 받고, 받은 라이브러리의 위치를 넣어줘야함.
         libDir: path.join(__dirname,'./odbLib')
+        
     });
     // 100 mb 용량을 넘어가면 git 에서 막음. 1GB 까지는 무룐데 git lfs 를 통해서 관리해줘야함.
     // https://hbase.tistory.com/221 참고
