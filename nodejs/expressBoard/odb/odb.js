@@ -13,8 +13,7 @@ oracledb.autoCommit = true;
 odb.odbCfg = {
     user: "nodeboard",
     password: "nodeboard",
-    // connectString: "localhost/xe" 집은 orcl 노트북은 xe 로 되어있음..
-    connectString: "localhost/xe"
+    connectString: "localhost/orcl"
 };
 
 
@@ -26,6 +25,7 @@ odb.initClt = () => {
     oracledb.initOracleClient({
         // 오라클 DB 에선 라이브러리 세팅이 필요하다고 함.
         // 라이브러리를 다운로드 받고, 받은 라이브러리의 위치를 넣어줘야함.
+        // (라이브러리 경로에 한글있으면 에러 뜸)
         libDir: path.join(__dirname,'./odbLib')
         
     });
