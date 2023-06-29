@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>boardList</h1>
+    <a href="/board/readFile">파일읽기</a>
+    <a href="/board/">boardMain</a>
+    <a href="/board/list">boardList</a>
+    <a href="/board/write">boardWrite</a>
+    <a href="/">Main</a><br>
+
+    <table>
+        <tr>
+            <td>순번</td>
+            <td>제목</td>
+            <td>작성자</td>
+            <td>작성일</td>
+        </tr>
+        <% for(let i=0; i<lists.length; i++) { %>
+            <tr>
+                <td>
+                    <%= lists[i].BRD_IDX %>
+                </td>
+                <td>
+                    <%= lists[i].BRD_TITLE %>
+                </td>
+                <td>
+                    <%= lists[i].BRD_WRITER %>
+                </td>
+                <td>
+                    <%= lists[i].BRD_REGDATE %>
+                </td>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

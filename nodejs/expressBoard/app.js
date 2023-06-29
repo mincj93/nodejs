@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const router = express.Router();
+const ejs = require('ejs');
 
 const boardRouter = require('./routes/board');
 
@@ -13,16 +14,18 @@ app.use(express.urlencoded({extended: true}));
 app.use('/', express.static(path.join(__dirname, '/public')));
 app.use('/board', boardRouter);
 
+app.set('view engine', 'ejs');
+
 // app.get('/', (req,res) =>{
-//     res.sendFile(__dirname + "/public/main.html");
+//     res.render(__dirname + "/public/main.html");
 // });
 
 app.get('/', (req,res) =>{
-    res.sendFile(__dirname + "/public/main.html");
+    res.render(__dirname + "/public/main.ejs");
 });
 
 router.get('/board', (req, res) =>{
-    res.sendFile('/', boardRouter);
+    res.render('/', boardRouter);
 });
 
 app.listen(3000, () =>{

@@ -1,6 +1,7 @@
 // oracledb 설정 관련 참고 https://m.blog.naver.com/scw0531/221169287236
 const oracledb = require('oracledb');
 const path = require('path');
+const ejs = require('ejs');
 
 const lg = console.log;
 
@@ -21,7 +22,7 @@ odb.odbCfg = {
 
 // 라이브러리 시동
 odb.initClt = () => { 
-    lg('path출력',path.join(__dirname,'./odbLib'))
+    //lg('path출력',path.join(__dirname,'./odbLib'))
     oracledb.initOracleClient({
         // 오라클 DB 에선 라이브러리 세팅이 필요하다고 함.
         // 라이브러리를 다운로드 받고, 받은 라이브러리의 위치를 넣어줘야함.
@@ -52,8 +53,9 @@ odb.doRelease = (connection) => {
 
 // readList 실행기 본체. 
 // return 값 = 쿼리결과값을 json 형태로 가져온 배열
-odb.RConn = (query, params) => {
+odb.RConn = (query, req, res, url) => {
     // param 은 req 이다.
+    lg('전체출력', url, res);
 
     odb.initClt(); // 라이브러리 시동
 
@@ -76,8 +78,9 @@ odb.RConn = (query, params) => {
                 lg('List 조회 완료 \n결과 ', result.rows[0].BRD_IDX);
 
                 odb.doRelease(connection);
-                const lists = result.rows;
-                return lists;
+                let lists = result.rows;
+                // return lists;
+                res.render(url, {lists : lists});
             });
         }
     );// oracledb.getConnection
