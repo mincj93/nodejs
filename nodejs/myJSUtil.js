@@ -124,3 +124,57 @@ util.randomString = (num, ch) => {  // num = 문자열길이 지정, ch = 조합
     }
     return rs;
 };
+
+// 배열 안에 배열 값들 중 key 값으로 지정가능한 것을 기준으로 만든뒤
+// 해당 기준값만 입력하면 정보를 찾을 수 있는 모듈
+// ------------------------------------------------------------
+let objectArr = [
+    [
+         1,
+         'kim',
+         10
+    ],
+    [
+         2,
+         'park',
+         20
+    ],
+    [
+         3,
+         'jeo',
+         30
+    ],
+    [
+         4,
+         'kwak',
+         40
+    ],
+    [
+         5,
+         'han',
+         50
+    ],
+    [
+         6,
+         'soo',
+         60
+    ],
+]
+
+function findObj(objArr, id){
+    let objects = {};   // 배열 내에 들어있는 오브젝트
+    // lg(objArr, id)
+    lg('########################');
+    for(let i in objArr){
+        let obj = objArr[i];
+        objects[obj[0]] = obj;
+    }
+
+    lg(objects)
+    return objects[id][1];
+}
+
+lg(findObj(objectArr , 2));
+
+// 정보찾기 모듈 끝
+// ------------------------------------------------------------
