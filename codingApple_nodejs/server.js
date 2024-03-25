@@ -36,6 +36,14 @@ app.get('/index', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/insert', () => {
+    for(i=1; i<=10; i++){
+        lg(`i 값은 == ${i}`);
+        // db.collection('post').insertOne({ title: `타이틀${i}`, content: `내용${i}` })
+    }
+    
+})
+
 app.get('/list', async (req, res) => {
     let result = await db.collection('post').find().toArray()
     res.send(result[0].title)
