@@ -1,10 +1,12 @@
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
 
 
 const app = express();
 app.use(express.static(__dirname + '/public')); // 정적폴더 사용하기위해 등록함.
+app.use(express.static(path.join(__dirname, '../testreact/build')));
 
 const lg = console.log;
 
@@ -25,7 +27,7 @@ new MongoClient(url).connect().then((client) => {
 
 
 app.get('/', (req, res) => {
-    res.send('반갑다 express');
+    res.sendFile(path.join(__dirname, '../testreact/build/index.html'));
 })
 
 app.get('/shop', (req, res) => {
