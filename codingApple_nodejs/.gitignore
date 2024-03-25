@@ -3,5 +3,4 @@
 #/node_modules
 
 # nodejs 경로 하위의 모든 node_modules폴더들을 모든 경로에서 제외한다고 하는거.
-/nodejs/**/node_modules/
 /codingApple_nodejs/**/node_modules/
