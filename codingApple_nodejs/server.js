@@ -2,11 +2,14 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
+const cors = require('cors');
 
 
 const app = express();
 app.use(express.static(__dirname + '/public')); // 정적폴더 사용하기위해 등록함.
 app.use(express.static(path.join(__dirname, '../testreact/build')));
+app.use(express.json());
+app.use(cors());
 
 const lg = console.log;
 
@@ -39,16 +42,17 @@ app.get('/index', (req, res) => {
 });
 
 app.get('/insert', () => {
-    for(i=1; i<=10; i++){
+    for (i = 1; i <= 10; i++) {
         lg(`i 값은 == ${i}`);
         // db.collection('post').insertOne({ title: `타이틀${i}`, content: `내용${i}` })
     }
-    
+
 })
 
 app.get('/list', async (req, res) => {
+    lg(`node 리스트 조회 req == ${JSON.stringify(req.body)}`);
     let result = await db.collection('post').find().toArray()
-    res.send(result[0].title)
+    res.send(result)
 });
 
 app.listen(8080, () => {
