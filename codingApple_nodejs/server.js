@@ -52,6 +52,7 @@ app.get('/insert', () => {
 app.get('/list', async (req, res) => {
     lg(`node 리스트 조회 req == ${JSON.stringify(req.body)}`);
     let result = await db.collection('post').find().toArray()
+    lg(result);
     res.send(result)
 });
 
