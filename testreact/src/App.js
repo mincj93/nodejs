@@ -9,6 +9,9 @@ import Tab1 from './tab/Tab1';
 import Tab2 from './tab/Tab2';
 import Tab3 from './tab/Tab3';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { setTabValue3, setTabValue3Empty } from './redux/tabStore';
+
 
 const lg = console.log;
 
@@ -17,6 +20,9 @@ function App() {
   let [list, setList] = useState([]);
   const [tabNum, setTabNum] = useState(0);
   const ref = useRef();
+  const dispatch = useDispatch();
+
+  let reduxState = useSelector((state) => state)
 
   const getList = async () => {
     try {
@@ -29,8 +35,8 @@ function App() {
   };
 
   useEffect(() => {
-
-  }, [list])
+    dispatch(setTabValue3(30))
+  })
 
   return (
     <div className="App">
@@ -64,6 +70,7 @@ function App() {
       <button onClick={()=>{setTabNum(0)}}>탭 1</button>
       <button onClick={()=>{setTabNum(1)}}>탭 2</button>
       <button onClick={()=>{setTabNum(2)}}>탭 3</button>
+      <button onClick={()=>{alert(JSON.stringify(reduxState))}}>탭 값들 출력</button>
       <TabContent tabNum={tabNum} />
     </div>
   );
