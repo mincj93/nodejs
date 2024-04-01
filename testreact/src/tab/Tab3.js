@@ -6,10 +6,7 @@ import { setTabValue3, setTabValue3Empty } from '../redux/tabStore';
 const Tab3 = () => {
     
     let dispatch = useDispatch();
-
-    useEffect(()=>{
-        dispatch(setTabValue3(30))
-    })
+    
 
     return (
         <div className='tab3'>

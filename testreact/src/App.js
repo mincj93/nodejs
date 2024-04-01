@@ -36,7 +36,7 @@ function App() {
 
   useEffect(() => {
     dispatch(setTabValue3(30))
-  })
+  },[])
 
   return (
     <div className="App">

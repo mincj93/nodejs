@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const app = express();
 app.use(express.static(__dirname + '/public')); // 정적폴더 사용하기위해 등록함.
-app.use(express.static(path.join(__dirname, '../testreact/build')));
+// app.use(express.static(path.join(__dirname, '../testreact/build')));
 app.use(express.json());
 app.use(cors());
 
@@ -30,24 +30,21 @@ new MongoClient(url).connect().then((client) => {
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../testreact/build/index.html'));
+    res.sendFile(path.join('/index.html'));
 })
 
 app.get('/shop', (req, res) => {
     res.send('shop 요청');
 });
 
+app.get('/about', (req, res) => {
+    res.sendFile(__dirname + '/about.html');
+});
+
+
 app.get('/index', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
-
-app.get('/insert', () => {
-    for (i = 1; i <= 10; i++) {
-        lg(`i 값은 == ${i}`);
-        // db.collection('post').insertOne({ title: `타이틀${i}`, content: `내용${i}` })
-    }
-
-})
 
 app.get('/list', async (req, res) => {
     lg(`node 리스트 조회 req == ${JSON.stringify(req.body)}`);
