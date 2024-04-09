@@ -6,8 +6,8 @@ const cors = require('cors');
 
 
 const app = express();
-app.use(express.static(__dirname + '/public')); // 정적폴더 사용하기위해 등록함.
-// app.use(express.static(path.join(__dirname, '../testreact/build')));
+// app.use(express.static(__dirname + '/public')); // 정적폴더 사용하기위해 등록함.
+app.use(express.static(path.join(__dirname, '../testreact/build')));
 app.use(express.json());
 app.use(cors());
 
@@ -52,6 +52,7 @@ app.get('/list', async (req, res) => {
     lg(result);
     res.send(result)
 });
+
 
 app.listen(8080, () => {
     lg('http://localhost:8080 에서 서버 실행중')
